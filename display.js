@@ -1,14 +1,13 @@
-var display= (con,user,socket)=>{
+var display= (q,con,res)=>{
    var msg ="";
    var rows="";
-   con.query("Select uname from users where uname != '"+user+"'",function(err,res,fields)
+   con.query("Select uname from users where uname != '"+q.user+"'",function(err,row,fields)
    {
        if (err) throw err;
        else
        {
-       	rows= {users: res}
-       	console.log(JSON.stringify(rows));
-       	socket.emit("getUsers", JSON.stringify(rows));
+       	
+       	res.json(row);
        }
    });
 };
